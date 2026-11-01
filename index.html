@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GC Records | Navidad en América</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #fff; }
+    header { background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); padding: 3rem 2rem; text-align: center; border-bottom: 3px solid #d4af37; }
+    h1 { font-size: 3.2rem; letter-spacing: 3px; color: #d4af37; font-weight: 700; }
+    h1 span { color: #fff; }
+    .tagline { margin-top: 0.5rem; font-size: 1.1rem; color: #aaa; letter-spacing: 1px; }
+    .lang-switch { margin-top: 1rem; }
+    .lang-switch button { background: transparent; border: 1px solid #d4af37; color: #d4af37; padding: 0.4rem 1rem; margin: 0 0.3rem; border-radius: 4px; cursor: pointer; }
+    .lang-switch button.active { background: #d4af37; color: #000; }
+    nav { display: flex; justify-content: center; gap: 2.5rem; padding: 1.2rem; background: #111; border-bottom: 1px solid #222; flex-wrap: wrap; }
+    nav a { color: #d4af37; text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+    nav a:hover { color: #fff; }
+    .album-hero { text-align: center; padding: 2rem 1rem 1rem; background: #0a0a0a; }
+    .album-hero img { max-width: 420px; width: 90%; border-radius: 12px; box-shadow: 0 10px 40px rgba(212,175,55,0.25); border: 2px solid #d4af37; }
+    .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)); padding: 3rem 2rem; text-align: center; }
+    .hero h2 { font-size: 2.5rem; color: #fff; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; color: #ddd; max-width: 700px; margin: 0 auto; }
+    section { max-width: 1100px; margin: 4rem auto; padding: 0 2rem; }
+    h2 { color: #d4af37; margin-bottom: 1.5rem; font-size: 2rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .card { background: #151515; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: #d4af37; }
+    .card h3 { color: #fff; margin-bottom: 0.5rem; }
+    .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+    .release-date { color: #d4af37; font-weight: 600; margin-bottom: 0.5rem; }
+    .tracklist { background: #151515; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; }
+    .track { display: flex; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid #222; }
+    .track:last-child { border-bottom: none; }
+    .track-num { color: #d4af37; font-weight: 700; width: 40px; }
+    .track-title { flex: 1; color: #fff; }
+    .track-listen { color: #d4af37; font-size: 0.85rem; text-decoration: none; }
+    .news-item { background: #151515; border-left: 4px solid #d4af37; padding: 1.5rem; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }
+    .news-item .date { color: #d4af37; font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .news-item h4 { color: #fff; margin-bottom: 0.5rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .contact-card { background: #151515; border: 1px solid #333; border-radius: 10px; padding: 1.3rem; }
+    .contact-card h3 { color: #d4af37; font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .contact-card .role { color: #aaa; font-size: 0.85rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-card p { color: #ccc; font-size: 0.95rem; }
+    footer { text-align: center; padding: 2rem; color: #666; border-top: 1px solid #222; margin-top: 4rem; }
+    .es { display: none; }
+    .memory { background: #111; border: 1px solid #333; border-radius: 12px; padding: 2rem; text-align: center; }
+    .memory h3 { color: #d4af37; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GC <span>RECORDS</span></h1>
+    <p class="tagline"><span class="en">Independent Label • Navidad en América • Worldwide</span><span class="es">Sello Independiente • Navidad en América • Mundial</span></p>
+    <div class="lang-switch">
+      <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+      <button onclick="setLang('es')" id="btn-es">ES</button>
+    </div>
+  </header>
+  <nav>
+    <a href="#about"><span class="en">Label</span><span class="es">Sello</span></a>
+    <a href="#artist"><span class="en">Artist</span><span class="es">Artista</span></a>
+    <a href="#music"><span class="en">Releases</span><span class="es">Lanzamientos</span></a>
+    <a href="#tracks"><span class="en">Tracklist</span><span class="es">Canciones</span></a>
+    <a href="#news"><span class="en">News</span><span class="es">Noticias</span></a>
+    <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
+  </nav>
+
+  <div class="album-hero">
+    <img src="https://via.placeholder.com/600x600/0a0a0a/d4af37?text=Navidad+en+América%0AGC+Records" alt="Navidad en América Album Cover">
+  </div>
+
+  <div class="hero">
+    <h2>Navidad en América</h2>
+    <p><span class="en">The Christmas album that connects North, Central & South America. Available now on all platforms.</span><span class="es">El álbum navideño que conecta Norte, Centro y Suramérica. Disponible ahora en todas las plataformas.</span></p>
+  </div>
+
+  <section id="about">
+    <h2><span class="en">The Label</span><span class="es">El Sello</span></h2>
+    <p style="color:#ccc; font-size:1.1rem; max-width:800px;">
+      <span class="en">GC Records is an independent label dedicated to Latino music that moves people. From cumbia electrónica to bachata and Caribbean rhythms, we create music that crosses borders and brings cultures together.</span>
+      <span class="es">GC Records es un sello independiente dedicado a la música latina que mueve a la gente. Desde cumbia electrónica hasta bachata y ritmos caribeños, creamos música que cruza fronteras y une culturas.</span>
+    </p>
+  </section>
+
+  <section id="artist">
+    <h2><span class="en">Artist Biography</span><span class="es">Biografía del Artista</span></h2>
+    <div class="card">
+      <h3>Guillermo Cárdenas</h3>
+      <p>
+        <span class="en">Independent artist, producer and founder of GC Records. Creator of the album <strong>Navidad en América</strong>, blending Latino Christmas traditions with cumbia electrónica, bachata and Caribbean rhythms. Based in Katy, Texas, with roots in Peru and New York. Building a global independent label focused on authentic Latino music that connects generations and cultures across the Americas.</span>
+        <span class="es">Artista independiente, productor y fundador de GC Records. Creador del álbum <strong>Navidad en América</strong>, que fusiona tradiciones navideñas latinas con cumbia electrónica, bachata y ritmos caribeños. Radicado en Katy, Texas, con raíces en Perú y Nueva York. Construyendo un sello independiente global enfocado en música latina auténtica que conecta generaciones y culturas a través de las Américas.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="music">
+    <h2><span class="en">Latest Release</span><span class="es">Último Lanzamiento</span></h2>
+    <div class="grid">
+      <div class="card">
+        <div class="release-date"><span class="en">Released: October 28, 2026</span><span class="es">Lanzado: 28 de Octubre, 2026</span></div>
+        <h3>Navidad en América</h3>
+        <p>
+          <span class="en">12 tracks of pure Latino Christmas energy. Featuring cumbia, bachata, and Caribbean rhythms. Now available on Spotify, Apple Music, YouTube and more.</span>
+          <span class="es">12 canciones de pura energía navideña latina. Con cumbia, bachata y ritmos caribeños. Disponible ahora en Spotify, Apple Music, YouTube y más.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks">
+    <h2><span class="en">Tracklist</span><span class="es">Lista de Canciones</span></h2>
+    <div class="tracklist">
+      <div class="track"><span class="track-num">01</span><span class="track-title">Navidad en América</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">02</span><span class="track-title">Feliz Navidad Latino</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">03</span><span class="track-title">Cumbia de Diciembre</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">04</span><span class="track-title">Bachata Navideña</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">05</span><span class="track-title">Noche Buena Caribeña</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">06</span><span class="track-title">Villancico Urbano</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">07</span><span class="track-title">Año Nuevo en América</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">08</span><span class="track-title">Ritmo de Navidad</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">09</span><span class="track-title">Familia y Fe</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">10</span><span class="track-title">Luces de la Ciudad</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">11</span><span class="track-title">Canción de Cuna Navideña</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+      <div class="track"><span class="track-num">12</span><span class="track-title">América Unida</span><a class="track-listen" href="#" target="_blank">Listen</a></div>
+    </div>
+    <p style="margin-top:1rem; color:#aaa; font-size:0.9rem;">
+      <span class="en">Listen on <a href="https://open.spotify.com" target="_blank" style="color:#d4af37;">Spotify</a>, <a href="https://music.apple.com" target="_blank" style="color:#d4af37;">Apple Music</a>, YouTube and all platforms.</span>
+      <span class="es">Escucha en <a href="https://open.spotify.com" target="_blank" style="color:#d4af37;">Spotify</a>, <a href="https://music.apple.com" target="_blank" style="color:#d4af37;">Apple Music</a>, YouTube y todas las plataformas.</span>
+    </p>
+  </section>
+
+  <section id="news">
+    <h2><span class="en">Latest News</span><span class="es">Últimas Noticias</span></h2>
+    <div class="news-item">
+      <div class="date">October 28, 2026 / 28 de Octubre, 2026</div>
+      <h4><span class="en">Navidad en América Official Launch</span><span class="es">Lanzamiento Oficial de Navidad en América</span></h4>
+      <p>
+        <span class="en">The highly anticipated Christmas album is now live on all major streaming platforms. Listen now and share the holiday spirit across the Americas.</span>
+        <span class="es">El tan esperado álbum navideño ya está disponible en todas las plataformas principales. Escúchalo ahora y comparte el espíritu navideño en las Américas.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="memory">
+    <h2><span class="en">In Memory Of</span><span class="es">En Memoria De</span></h2>
+    <div class="memory">
+      <h3><span class="en">In Memory Of</span><span class="es">En Memoria De</span></h3>
+      <p style="color:#d4af37; font-size:1.4rem; font-weight:600; margin:1rem 0;">Ali Cáceres Arata</p>
+      <p style="color:#ccc; max-width:700px; margin:0 auto;">
+        <span class="en">This project is dedicated in memory of Ali Cáceres Arata. Their spirit lives on through the music.</span>
+        <span class="es">Este proyecto está dedicado en memoria de Ali Cáceres Arata. Su espíritu vive a través de la música.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2><span class="en">Contact</span><span class="es">Contacto</span></h2>
+    <p style="color:#ccc; margin-bottom:1rem;">
+      <span class="en">General inquiries: <strong>mrg.viral@gmail.com</strong></span>
+      <span class="es">Consultas generales: <strong>mrg.viral@gmail.com</strong></span>
+    </p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Chris Mercado</h3>
+        <div class="role"><span class="en">Public Relations – USA</span><span class="es">Relacionista Público – USA</span></div>
+        <p><span class="en">US media, radio & industry relations</span><span class="es">Medios, radio y relaciones de la industria en USA</span></p>
+      </div>
+      <div class="contact-card">
+        <h3>Carlos Sosa</h3>
+        <div class="role"><span class="en">Public Relations – Latin America</span><span class="es">Relacionista Público – Latinoamérica</span></div>
+        <p><span class="en">Latin America media & regional promotion</span><span class="es">Medios de Latinoamérica y promoción regional</span></p>
+      </div>
+      <div class="contact-card">
+        <h3>Stephanie Alvarado</h3>
+        <div class="role"><span class="en">Media</span><span class="es">Media</span></div>
+        <p><span class="en">Media inquiries & coordination</span><span class="es">Consultas de media y coordinación</span></p>
+        <p style="margin-top:0.5rem;"><strong>sat0817@hotmail.com</strong></p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 GC Records. All rights reserved.
+  </footer>
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+      document.querySelectorAll('.es').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+      document.documentElement.lang = lang;
+    }
+    setLang('en');
+  </script>
+</body>
+</html>
